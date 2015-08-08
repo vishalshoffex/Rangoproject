@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Rango Project</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+    <h1 style="color:red">Rango says... Hello {{user.username}}</h1>
+
+    <h2 style="color:orange">Main Categories</h2>
+    {% if categories %}
+            <ul>
+                {% for category in categories %}
+                <li><a href="/rango/category/{{ category.slug }}">{{category.name}}</a></li>
+                {% endfor %}
+                
+            </ul>
+        {% else %}
+            <strong>There are no categories present.</strong>
+        {% endif %}
+        <br>
+    <a href="/rango/add_category/">Add a New Category</a><br /><br>
+        <h3 style="color:blue">Top 5 viewed pages</h3>
+    {% if page_view %}
+            <ul>
+                {% for page in page_view %}
+                <li>{{page.title}} ---- Views : {{page.views}}</li>
+                {% endfor %}
+            </ul>
+    {% endif %}
+
+
+      <a href="/rango/restricted/">Restricted Page</a>
+    <br  /><br>
+    <a href="/rango/logout/">Logout</a>
+    <br  /><br>
+{% else %}
+    <h1 style="color:red">Rango says... Hello World</h1>
+
+
+
+       <a href="/rango/register/">Register Here</a>
+    <br  /><br>
+    <a href='/rango/login'>Login</a> 
+    <br  /><br>
+{% endif %}
+	
+    
+
+	<a href='/rango/about'>About</a> 
+	</body>
+</html>
+
